@@ -13,7 +13,8 @@ class SocketService extends SocketHandler {
       .on("s:creating:channel", this.creatingChannel)
       .on("s:creating:message", this.creatingMessage)
       .on("s:leaving:room", this.leavingRoom)
-      .on("s:joining:room", this.joiningRoom);
+      .on("s:joining:room", this.joiningRoom)
+      .on("s:channelOwner:messageCreated", this.messageChannelOwner);
   }
 
   onError(e) {
@@ -77,6 +78,17 @@ class SocketService extends SocketHandler {
     `,
         "danger",
         "bottom-end"
+      );
+    }
+  }
+
+  messageChannelOwner(payload) {
+    let message = new Message(payload);
+    if (payload && AppState.account.id == payload.id) {
+      Pop.toast(
+        `
+        <h5>${message.Creator.name} has messaged in your ${message.Channel.name}</h5>
+        `
       );
     }
   }
