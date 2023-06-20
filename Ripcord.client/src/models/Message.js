@@ -1,3 +1,4 @@
+import { Channel } from "./Channel.js";
 import { Profile } from "./Profile";
 
 export class Message {
@@ -7,5 +8,6 @@ export class Message {
     this.img = data.img;
     this.createdAt = data.createdAt;
     this.Creator = new Profile(data.creator);
+    this.Channel = new Channel(data.Channel);
   }
 }
