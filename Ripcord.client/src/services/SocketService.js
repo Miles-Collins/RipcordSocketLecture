@@ -84,11 +84,13 @@ class SocketService extends SocketHandler {
 
   messageChannelOwner(payload) {
     let message = new Message(payload);
+
+    // Checking if the "payload" exists and the ID of the current account in the application state matches the ID in the payload
     if (payload && AppState.account.id == payload.id) {
       Pop.toast(
         `
-        <h5>${message.Creator.name} has messaged in your ${message.Channel.name}</h5>
-        `
+      <h5>${message.Creator.name} has messaged in your ${message.Channel.name}</h5>
+      `
       );
     }
   }
